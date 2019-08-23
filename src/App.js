@@ -1,26 +1,57 @@
 import React from 'react';
-import logo from './logo.svg';
+import { AddTask } from './AddTask';
+import { TaskList } from './TaskList';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edits <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: '',
+      list: ['a', 'b', 'c'],
+    };
+  }
+
+  onChangeValue = event => {
+    this.setState({ value: event.target.value });
+  };
+
+  onAddItem = () => {
+    this.setState(state => {
+      const list = state.list.concat(state.value);
+
+      return {
+        list,
+        value: '',
+      };
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <ul>
+          {this.state.list.map(item => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+
+        <input
+          type="text"
+          value={this.state.value}
+          onChange={this.onChangeValue}
+        />
+        <button
+          type="button"
+          onClick={this.onAddItem}
+          disabled={!this.state.value}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          Add
+        </button>
+      </div>
+    );
+  }
 }
 
 export default App;
