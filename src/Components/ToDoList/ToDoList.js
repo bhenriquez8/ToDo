@@ -8,7 +8,9 @@ class ToDoList extends React.Component {
     return(
       <div className="ToDoList">
         <h2>Things To Do:</h2>
-        <TaskList todoList={this.props.todoList}/>
+        <TaskList
+          todoList={this.props.todoList}
+          removeTodo={this.props.removeTodo}/>
       </div>
     );
   }

@@ -1,3 +1,19 @@
-li {
-  margin: 0.725rem 0;
+.Task {
+  width: 50%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.Task input {
+  margin-right: 1rem;
+  margin-bottom: 0.825rem;
+}
+
+.Task button {
+  display: none;
+  float: right;
+}
+
+.Task:hover button {
+  display: inline-block;
 }
