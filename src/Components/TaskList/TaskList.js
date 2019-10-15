@@ -9,9 +9,10 @@ class TaskList extends React.Component {
       <div className="TaskList">
         <ul>
           {
-            this.props.todoList.map((task, index) => {
-              return <Task key={index} task={task} removeTodo={this.props.removeTodo}/>
-            })
+            this.props.todoList ?
+            this.props.todoList.map(task => {
+              return <Task key={task.id} task={task} removeTodo={this.props.removeTodo}/>
+            }) : null
           }
         </ul>
       </div>

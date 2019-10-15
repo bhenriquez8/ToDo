@@ -17,8 +17,8 @@ class Task extends React.Component {
   render() {
     return(
       <div className="Task">
-        <input type="checkbox" id={this.props.task} name={this.props.task} />
-        <label htmlFor={this.props.task}>{this.props.task}</label>
+        <input type="checkbox" id={this.props.task.id} name={this.props.task.task} />
+        <label htmlFor={this.props.task.task}>{this.props.task.task}</label>
         <button onClick={this.handleRemove}>x</button>
       </div>
     );

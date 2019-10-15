@@ -4,6 +4,8 @@ import './App.css';
 import EnterTaskBar from '../EnterTaskBar/EnterTaskBar';
 import ToDoList from '../ToDoList/ToDoList';
 
+const firebase = require('firebase');
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -12,48 +14,51 @@ class App extends React.Component {
     this.removeTodo = this.removeTodo.bind(this);
 
     this.state = {
-      taskList: []
+      taskList: null
     }
   }
 
   componentDidMount() {
-    const tasks = JSON.parse(localStorage.getItem('item')) || [];
-
-    if (tasks.length === 0) {
-      console.log('No ToDos');
-    } else {
-      tasks.forEach(task => {
-        this.addTodo(task);
+    firebase
+      .firestore()
+      .collection('tasks')
+      .orderBy("timestamp", "asc")
+      .onSnapshot(serverUpdate => {
+        const tasks = serverUpdate.docs.map(_doc => {
+          const task = _doc.data();
+          task['id'] = _doc.id;
+          return task;
+        });
+        this.setState({ taskList: tasks });
       })
-    }
   }
 
-  addTodo(task) {
-    const tasks = this.state.taskList;
-    tasks.push(task);
+  addTodo = (task) => {
+    const newTask = { task: task };
 
+    firebase
+      .firestore()
+      .collection('tasks')
+      .add({
+        task: newTask.task,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    
     this.setState({
-      taskList: tasks
+      taskList: [...this.state.taskList, newTask]
     });
-
-    localStorage.setItem('item', JSON.stringify(tasks));
   }
 
   removeTodo(task) {
-    const tasks = this.state.taskList;
-    let updatedTasks = [];
-
-    tasks.forEach(taskItem => {
-      if (taskItem !== task) {
-        updatedTasks.push(taskItem);
-      }
-    });
-
     this.setState({
-      taskList: updatedTasks
+      taskList: this.state.taskList.filter(_task => _task !== task)
     });
-
-    localStorage.setItem('item', JSON.stringify(updatedTasks));
+  
+    firebase
+      .firestore()
+      .collection('tasks')
+      .doc(task.id)
+      .delete();
   }
 
   render() {
