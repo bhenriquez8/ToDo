@@ -1,75 +1,23 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import EnterTaskBar from '../EnterTaskBar/EnterTaskBar';
-import ToDoList from '../ToDoList/ToDoList';
-
-const firebase = require('firebase');
+import Nav from '../Nav/Nav';
+import SidePanel from '../SidePanel/SidePanel';
+import DashBoard from '../DashBoard/DashBoard';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.addTodo = this.addTodo.bind(this);
-    this.removeTodo = this.removeTodo.bind(this);
-
-    this.state = {
-      taskList: null
-    }
-  }
-
-  componentDidMount() {
-    firebase
-      .firestore()
-      .collection('tasks')
-      .orderBy("timestamp", "asc")
-      .onSnapshot(serverUpdate => {
-        const tasks = serverUpdate.docs.map(_doc => {
-          const task = _doc.data();
-          task['id'] = _doc.id;
-          return task;
-        });
-        this.setState({ taskList: tasks });
-      })
-  }
-
-  addTodo = (task) => {
-    const newTask = { task: task };
-
-    firebase
-      .firestore()
-      .collection('tasks')
-      .add({
-        task: newTask.task,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
-    
-    this.setState({
-      taskList: [...this.state.taskList, newTask]
-    });
-  }
-
-  removeTodo(task) {
-    this.setState({
-      taskList: this.state.taskList.filter(_task => _task !== task)
-    });
-  
-    firebase
-      .firestore()
-      .collection('tasks')
-      .doc(task.id)
-      .delete();
-  }
-
   render() {
     return (
-      <div className="App">
-        <h1>My To-Do List</h1>
-        <EnterTaskBar onClick={this.addTodo}/>
-        <ToDoList
-          todoList={this.state.taskList}
-          removeTodo={this.removeTodo}/>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Nav />
+          <SidePanel />
+          <Switch>
+            <Route path='/' component={DashBoard} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }

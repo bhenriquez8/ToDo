@@ -1,0 +1,25 @@
+.menu {
+  padding: 20px 0;
+  width: 100%;
+  height: 30px;
+  background-color: #3287a3;
+  overflow: auto;
+}
+
+.menu span {
+  color: white;
+  padding: 0 1.5em;
+}
+
+.menu input {
+  width: 25%;
+  height: 75%;
+}
+
+.logo {
+  float: left;
+}
+
+.account {
+  float: right;
+}
