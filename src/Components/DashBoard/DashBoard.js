@@ -64,10 +64,12 @@ class DashBoard extends React.Component {
   render() {
     return (
       <div className='DashBoard'>
-        <EnterTaskBar onClick={this.addTodo}/>
-        <ToDoList
-          todoList={this.state.taskList}
-          removeTodo={this.removeTodo}/>
+        <div className='container'>
+          <EnterTaskBar onClick={this.addTodo}/>
+          <ToDoList
+            todoList={this.state.taskList}
+            removeTodo={this.removeTodo}/>
+        </div>
       </div>
     );
   }

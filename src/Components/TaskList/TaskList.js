@@ -7,7 +7,7 @@ class TaskList extends React.Component {
   render() {
     return(
       <div className="TaskList">
-        <ul>
+        <ul className='collection'>
           {
             this.props.todoList ?
             this.props.todoList.map(task => {

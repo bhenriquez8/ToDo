@@ -31,12 +31,14 @@ class EnterTaskBar extends React.Component {
   render() {
     return (
       <div className="EnterTaskBar">
-        <input
-        type='text'
-        value={this.state.inputField}
-        onChange={this.handleChange}
-        placeholder='Enter a task'/>
-        <button onClick={this.handleClick}>Add Task</button>
+        <div className='container'>
+          <input
+          type='text'
+          value={this.state.inputField}
+          onChange={this.handleChange}
+          placeholder='Enter a task'/>
+          <button onClick={this.handleClick}>Add Task</button>
+        </div>
       </div>
     );
   }

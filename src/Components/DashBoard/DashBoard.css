@@ -1,3 +1,9 @@
 .DashBoard {
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 200px;
+  right: 0;
   text-align: center;
+  background-color: black;
 }
