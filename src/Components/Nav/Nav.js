@@ -5,7 +5,7 @@ class Nav extends React.Component {
   render() {
     return (
       <nav id='menu' className='nav-wrapper indigo darken-1'>
-        <a href="#" className="brand-logo left">Logo</a> 
+        <span className="brand-logo left">Logo</span> 
         <ul className='hide-on-med-and-down right'>
           <li>
             <div className='center row'>

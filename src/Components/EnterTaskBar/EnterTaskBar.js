@@ -1,5 +1,7 @@
 import React from 'react';
 import './EnterTaskBar.css';
+import { connect } from 'react-redux';
+import { createTask } from '../../store/actions/taskAction';
 
 class EnterTaskBar extends React.Component {
   constructor(props) {
@@ -22,7 +24,8 @@ class EnterTaskBar extends React.Component {
   handleClick(event) {
     event.preventDefault();
 
-    this.props.onClick(this.state.inputField);
+    this.props.createTask(this.state.inputField);
+    //this.props.onClick(this.state.inputField);
     this.setState({
       inputField: ''
     });
@@ -44,4 +47,10 @@ class EnterTaskBar extends React.Component {
   }
 }
 
-export default EnterTaskBar;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createTask: (task) => dispatch(createTask(task))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(EnterTaskBar);

@@ -4,7 +4,9 @@ import './DashBoard.css';
 import EnterTaskBar from '../EnterTaskBar/EnterTaskBar';
 import ToDoList from '../ToDoList/ToDoList';
 
-const firebase = require('firebase');
+import { connect } from 'react-redux';
+
+const firebase = require('firebase/app');
 
 class DashBoard extends React.Component {
   constructor(props) {
@@ -13,13 +15,13 @@ class DashBoard extends React.Component {
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
 
-    this.state = {
+    /*this.state = {
       taskList: null
-    }
+    }*/
   }
 
   componentDidMount() {
-    firebase
+    /*firebase
       .firestore()
       .collection('tasks')
       .orderBy("timestamp", "asc")
@@ -30,7 +32,7 @@ class DashBoard extends React.Component {
           return task;
         });
         this.setState({ taskList: tasks });
-      })
+      })*/
   }
 
   addTodo = (task) => {
@@ -67,7 +69,7 @@ class DashBoard extends React.Component {
         <div className='container'>
           <EnterTaskBar onClick={this.addTodo}/>
           <ToDoList
-            todoList={this.state.taskList}
+            todoList={this.props.tasks}
             removeTodo={this.removeTodo}/>
         </div>
       </div>
@@ -75,4 +77,10 @@ class DashBoard extends React.Component {
   }
 }
 
-export default DashBoard;
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.task.tasks
+  }
+}
+
+export default connect(mapStateToProps)(DashBoard);
