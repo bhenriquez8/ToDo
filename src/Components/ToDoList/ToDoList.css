@@ -1,3 +1,13 @@
 .ToDoList {
   margin-top: 1.5rem;
 }
+
+.ToDoList h2 {
+  color: white;
+  font-size: 32px;
+}
+
+.ToDoList ul {
+  max-height: 300px;
+  overflow: scroll;
+}

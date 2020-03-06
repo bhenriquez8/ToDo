@@ -1,28 +1,15 @@
 import React from 'react';
 import './Task.css';
 
-class Task extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleRemove = this.handleRemove.bind(this);
-  }
-
-  handleRemove(event) {
-    event.preventDefault();
-
-    this.props.removeTodo(this.props.task);
-  }
-
-  render() {
-    return(
-      <li className="Task collection-item">
-        <input type="checkbox" id={this.props.task.id} name={this.props.task.task} />
-        <label htmlFor={this.props.task.task}>{this.props.task.task}</label>
-        <button onClick={this.handleRemove}>x</button>
-      </li>
-    );
-  }
-}
+const Task = props => {
+  return (
+    <li className='Task collection-item'>
+      <input type='checkbox' id={props.task.id} name={props.task.task} />
+      <label htmlFor={props.task.task}>{props.task.task}</label>
+      <i className='material-icons'>delete</i>
+      <i className='material-icons'>create</i>
+    </li>
+  );
+};
 
 export default Task;

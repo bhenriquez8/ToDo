@@ -6,3 +6,7 @@
   left: 0;
   color: white;
 }
+
+.Panel ul li {
+  cursor: pointer;
+}

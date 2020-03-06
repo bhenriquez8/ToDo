@@ -23,9 +23,8 @@ class EnterTaskBar extends React.Component {
 
   handleClick(event) {
     event.preventDefault();
-
+    // dispatches the action creator in order to update firebase
     this.props.createTask(this.state.inputField);
-    //this.props.onClick(this.state.inputField);
     this.setState({
       inputField: ''
     });
@@ -36,6 +35,7 @@ class EnterTaskBar extends React.Component {
       <div className="EnterTaskBar">
         <div className='container'>
           <input
+          className='white'
           type='text'
           value={this.state.inputField}
           onChange={this.handleChange}

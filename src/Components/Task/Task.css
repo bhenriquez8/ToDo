@@ -1,6 +1,6 @@
 .Task {
-  width: 50%;
-  margin: 0 auto;
+  /*width: 50%;
+  margin: 0 auto;*/
   text-align: left;
 }
 
@@ -9,11 +9,18 @@
   margin-bottom: 0.825rem;
 }
 
-.Task button {
-  display: none;
-  float: right;
+.Task label {
+  font-weight: bold;
+  color: black;
 }
 
-.Task:hover button {
+.Task i {
+  display: none;
+  float: right;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.Task:hover i {
   display: inline-block;
 }

@@ -13,7 +13,7 @@ class Nav extends React.Component {
                 <div className='row' id='topbarseach'>
                   <div className='input-field col s6 s12'>
                     <i className='white-text material-icons prefix'>search</i>
-                    <input type='text' placeholder='search' id='autocomplete-input white-text'/>
+                    <input className='indigo lighten-1' type='text' placeholder='search' id='autocomplete-input'/>
                   </div>
                 </div>
               </div>

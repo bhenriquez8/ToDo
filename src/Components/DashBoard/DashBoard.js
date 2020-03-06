@@ -4,83 +4,33 @@ import './DashBoard.css';
 import EnterTaskBar from '../EnterTaskBar/EnterTaskBar';
 import ToDoList from '../ToDoList/ToDoList';
 
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
 
-const firebase = require('firebase/app');
-
-class DashBoard extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.addTodo = this.addTodo.bind(this);
-    this.removeTodo = this.removeTodo.bind(this);
-
-    /*this.state = {
-      taskList: null
-    }*/
-  }
-
-  componentDidMount() {
-    /*firebase
-      .firestore()
-      .collection('tasks')
-      .orderBy("timestamp", "asc")
-      .onSnapshot(serverUpdate => {
-        const tasks = serverUpdate.docs.map(_doc => {
-          const task = _doc.data();
-          task['id'] = _doc.id;
-          return task;
-        });
-        this.setState({ taskList: tasks });
-      })*/
-  }
-
-  addTodo = (task) => {
-    const newTask = { task: task };
-
-    firebase
-      .firestore()
-      .collection('tasks')
-      .add({
-        task: newTask.task,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
-    
-    this.setState({
-      taskList: [...this.state.taskList, newTask]
-    });
-  }
-
-  removeTodo(task) {
-    this.setState({
-      taskList: this.state.taskList.filter(_task => _task !== task)
-    });
-  
-    firebase
-      .firestore()
-      .collection('tasks')
-      .doc(task.id)
-      .delete();
-  }
-
-  render() {
-    return (
-      <div className='DashBoard'>
-        <div className='container'>
-          <EnterTaskBar onClick={this.addTodo}/>
-          <ToDoList
-            todoList={this.props.tasks}
-            removeTodo={this.removeTodo}/>
-        </div>
+const DashBoard = props => {
+  return (
+    <div className='DashBoard'>
+      <div className='container'>
+        <EnterTaskBar />
+        <ToDoList todoList={props.tasks} />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    tasks: state.task.tasks
-  }
-}
+    //tasks: state.task.tasks
+    tasks: state.firestore.ordered.tasks
+  };
+};
 
-export default connect(mapStateToProps)(DashBoard);
+//export default connect(mapStateToProps)(DashBoard);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    // when this component is active
+    { collection: 'tasks' } // this will induce the firestoreReducer whenever the database changes
+  ]) // and it will update the state whenever the database changes
+)(DashBoard);
