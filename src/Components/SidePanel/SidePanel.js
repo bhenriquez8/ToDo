@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './SidePanel.css';
 
 export class SidePanel extends Component {
@@ -13,8 +13,8 @@ export class SidePanel extends Component {
           <li className='collection-item grey darken-3'>Important</li>
         </ul>
       </div>
-    )
+    );
   }
 }
 
-export default SidePanel
+export default SidePanel;

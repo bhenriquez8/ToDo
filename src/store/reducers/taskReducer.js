@@ -1,8 +1,8 @@
 const defaultState = {
   tasks: [
-    {id: 1, task: 'first item'},
-    {id: 2, task: 'do some laundry'},
-    {id: 3, task: 'finish personal project'}
+    { id: 1, task: 'first item' },
+    { id: 2, task: 'do some laundry' },
+    { id: 3, task: 'finish personal project' }
   ]
 };
 
@@ -14,9 +14,15 @@ const taskReducer = (state = defaultState, action) => {
     case 'CREATE_TASK_ERROR':
       console.log('created task error', action.err);
       return state;
+    case 'DELETE_TASK':
+      console.log('deleted task', action.taskID);
+      return state;
+    case 'DELETE_TASK_ERROR':
+      console.log('deleted task error', action.err);
+      return state;
     default:
       return state;
   }
-}
+};
 
 export default taskReducer;
