@@ -34,3 +34,24 @@ export const deleteTask = taskID => {
       });
   };
 };
+
+export const updateTask = taskObj => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    const todaysDate = new Date().toLocaleDateString();
+    firestore
+      .collection('tasks')
+      .doc(taskObj.id)
+      .update({
+        task: taskObj.task,
+        date: todaysDate,
+        isImportant: false
+      })
+      .then(() => {
+        dispatch({ type: 'UPDATE_TASK' });
+      })
+      .catch(err => {
+        dispatch({ type: 'UPDATE_TASK_ERROR' }, err);
+      });
+  };
+};

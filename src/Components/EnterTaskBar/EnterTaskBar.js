@@ -32,25 +32,28 @@ class EnterTaskBar extends React.Component {
 
   render() {
     return (
-      <div className="EnterTaskBar">
+      <div className='EnterTaskBar'>
         <div className='container'>
           <input
-          className='white'
-          type='text'
-          value={this.state.inputField}
-          onChange={this.handleChange}
-          placeholder='Enter a task'/>
-          <button onClick={this.handleClick}>Add Task</button>
+            className='white'
+            type='text'
+            value={this.state.inputField}
+            onChange={this.handleChange}
+            placeholder='Enter a task'
+          />
+          <button className='btn-small' onClick={this.handleClick}>
+            Add Task
+          </button>
         </div>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    createTask: (task) => dispatch(createTask(task))
-  }
-}
+    createTask: task => dispatch(createTask(task))
+  };
+};
 
 export default connect(null, mapDispatchToProps)(EnterTaskBar);

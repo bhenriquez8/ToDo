@@ -1,5 +1,5 @@
 import React from 'react';
-import './DashBoard.css';
+//import './DashBoard.css';
 
 import EnterTaskBar from '../EnterTaskBar/EnterTaskBar';
 import ToDoList from '../ToDoList/ToDoList';
@@ -11,10 +11,8 @@ import { firestoreConnect } from 'react-redux-firebase';
 const DashBoard = props => {
   return (
     <div className='DashBoard'>
-      <div className='container'>
-        <EnterTaskBar />
-        <ToDoList todoList={props.tasks} />
-      </div>
+      <EnterTaskBar />
+      <ToDoList todoList={props.tasks} />
     </div>
   );
 };
