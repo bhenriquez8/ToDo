@@ -1,3 +1,12 @@
+import {
+  CREATE_TASK,
+  CREATE_TASK_ERROR,
+  DELETE_TASK,
+  DELETE_TASK_ERROR,
+  UPDATE_TASK,
+  UPDATE_TASK_ERROR
+} from '../todoConstants';
+
 const firebase = require('firebase/app');
 
 export const createTask = task => {
@@ -11,10 +20,10 @@ export const createTask = task => {
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       })
       .then(() => {
-        dispatch({ type: 'CREATE_TASK', task });
+        dispatch({ type: CREATE_TASK, task });
       })
       .catch(err => {
-        dispatch({ type: 'CREATE_TASK_ERROR', err });
+        dispatch({ type: CREATE_TASK_ERROR, err });
       });
   };
 };
@@ -27,10 +36,10 @@ export const deleteTask = taskID => {
       .doc(taskID)
       .delete()
       .then(() => {
-        dispatch({ type: 'DELETE_TASK', taskID });
+        dispatch({ type: DELETE_TASK, taskID });
       })
       .catch(err => {
-        dispatch({ type: 'DELETE_TASK_ERROR', err });
+        dispatch({ type: DELETE_TASK_ERROR, err });
       });
   };
 };
@@ -38,20 +47,19 @@ export const deleteTask = taskID => {
 export const updateTask = taskObj => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    const todaysDate = new Date().toLocaleDateString();
     firestore
       .collection('tasks')
       .doc(taskObj.id)
       .update({
         task: taskObj.task,
-        date: todaysDate,
-        isImportant: false
+        due_date: taskObj.due_date,
+        isImportant: taskObj.isImportant
       })
       .then(() => {
-        dispatch({ type: 'UPDATE_TASK' });
+        dispatch({ type: UPDATE_TASK });
       })
       .catch(err => {
-        dispatch({ type: 'UPDATE_TASK_ERROR' }, err);
+        dispatch({ type: UPDATE_TASK_ERROR }, err);
       });
   };
 };

@@ -4,6 +4,7 @@ import './Task.css';
 import { connect } from 'react-redux';
 import { showForm } from '../../store/actions/showEditAction';
 import { deleteTask } from '../../store/actions/taskAction';
+import { assignCurrentTask } from '../../store/actions/currentTaskAction';
 
 class Task extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class Task extends React.Component {
 
   handleShowEdit(e) {
     this.props.showForm();
+    this.props.assignCurrentTask(this.props.task);
   }
 
   render() {
@@ -47,7 +49,8 @@ class Task extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     showForm: () => dispatch(showForm()),
-    deleteTask: taskID => dispatch(deleteTask(taskID))
+    deleteTask: taskID => dispatch(deleteTask(taskID)),
+    assignCurrentTask: taskObj => dispatch(assignCurrentTask(taskObj))
   };
 };
 
