@@ -41,9 +41,9 @@ class EnterTaskBar extends React.Component {
             onChange={this.handleChange}
             placeholder='Enter a task'
           />
-          <button className='btn-small' onClick={this.handleClick}>
-            Add Task
-          </button>
+          <div className='btn-small amber' onClick={this.handleClick}>
+            <span style={{ color: 'black' }}>Add Task</span>
+          </div>
         </div>
       </div>
     );

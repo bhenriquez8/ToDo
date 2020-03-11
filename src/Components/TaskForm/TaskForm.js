@@ -1,4 +1,5 @@
 import React from 'react';
+import './TaskForm.css';
 import { connect } from 'react-redux';
 import { updateTask } from '../../store/actions/taskAction';
 import { showForm } from '../../store/actions/showEditAction';
@@ -65,7 +66,7 @@ class TaskForm extends React.Component {
 
   render() {
     return (
-      <div className='row white'>
+      <div className='TaskForm row white'>
         <form className='col s12'>
           <div className='row'>
             <div className='col s1 offset-s10'>
@@ -122,10 +123,10 @@ class TaskForm extends React.Component {
           </div>
           <div className='row'>
             <div
-              className='col s3 offset-s1 btn-small'
+              className='col s3 offset-s1 btn-small amber'
               onClick={this.submitEditedTask}
             >
-              <span>Update</span>
+              <span style={{ color: 'black' }}>Update</span>
             </div>
           </div>
         </form>

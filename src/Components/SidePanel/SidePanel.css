@@ -8,5 +8,12 @@
 }
 
 .Panel ul li {
+  padding-top: 10px;
+  margin: 15px 0 15px 20px;
+  text-align: left;
   cursor: pointer;
+}
+
+li:hover {
+  color: black;
 }

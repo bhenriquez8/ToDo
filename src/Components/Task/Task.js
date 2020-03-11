@@ -25,12 +25,12 @@ class Task extends React.Component {
 
   render() {
     return (
-      <li className='Task collection-item'>
+      <li className='Task collection-item indigo lighten-5'>
         <label htmlFor={this.props.task.task}>
           <input
             type='checkbox'
             className='filled-in'
-            id={this.props.task.id}
+            id={this.props.task.task}
             name={this.props.task.task}
           />
           <span>{this.props.task.task}</span>
